@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/liampesser/Todos_VanillaJs_Modern/issues"
   },
-  "homepage": "https://github.com/liampesser/Todos_VanillaJs_Modern#readme"
+  "homepage": "https://github.com/liampesser/Todos_VanillaJs_Modern#readme",
+  "dependencies": {
+    "data.js": "^0.12.11"
+  }
 }
