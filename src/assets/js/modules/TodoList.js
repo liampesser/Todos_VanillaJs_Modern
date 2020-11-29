@@ -57,6 +57,18 @@ export default class TodoList {
   }
 
 /**
+ * Suppression d'un Todo par son id
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+  removeOneById (id) {
+    this.todos = this.todos.filter(function(todo) {
+      return todo.id !== id;
+    });
+    console.table(this.todos);
+  }
+
+/**
   * Activation des éléments interactifs de la TodoList
   * @return {[type]} [description]
   */
