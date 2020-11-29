@@ -35,8 +35,14 @@ export default class Todo {
  * Toggle completed du Todo
  * @return {[type]} [description]
  */
-  _toggleCompleted() {
-    this.completed = ! this.completed;
+  toggleCompleted () {
+    this.completed = !this.completed;
+    if (this.completed) {
+      this.el.querySelector('.toggle').checked = true;
+    }
+    else {
+      this.el.querySelector('.toggle').removeAttribute('checked');
+    }
     this.el.querySelector('li').classList.toggle('completed');
     this.parent.setNotCompletedNumber();
   }
@@ -70,7 +76,7 @@ export default class Todo {
   _activerBtns () {
     // Activation des .toggle
       this.el.querySelector('.toggle').onclick = () => {
-        this._toggleCompleted();
+        this.toggleCompleted();
       }
 
     // Activation des .destroy
