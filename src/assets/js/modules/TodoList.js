@@ -65,7 +65,6 @@ export default class TodoList {
     this.todos = this.todos.filter(function(todo) {
       return todo.id !== id;
     });
-    console.table(this.todos);
   }
 
 /**
