@@ -73,6 +73,23 @@ export default class TodoList {
     });
   }
 
+/**
+ * Suppression de tous les todos.completed
+ * @return {[type]} [description]
+ */
+  removeAllCompleted() {
+    // Supprimer les todo.completed de this.todos
+    this.todos = this.todos.filter(function (todo) {
+      return !todo.completed;
+    });
+    this.render(this.todos);
+  }
+
+/**
+ * Affichage des todos correspondants au filtre choisi
+ * @param  {[type]} filter [description]
+ * @return {[type]}        [description]
+ */
   _filter (filter) {
     switch (filter) {
       case 'active':
@@ -100,7 +117,7 @@ export default class TodoList {
         if (e.keyCode === 13) {
           this.addTodo();
         }
-      }
+      };
 
     // Activation des .filter
       const filterBtns = this.el.querySelectorAll('.filter');
@@ -109,5 +126,9 @@ export default class TodoList {
           this._filter(filterBtn.dataset.filter);
         }
       }
+    // Activation du .clear-completed
+      this.el.querySelector('.clear-completed').onclick = () => {
+        this.removeAllCompleted();
+      };
   }
 }
