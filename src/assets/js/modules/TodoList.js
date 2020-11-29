@@ -9,8 +9,14 @@ export default class TodoList {
     this.todos = [];
     this.loadTodos(data.todos);
     this.template = todoListTemplate;
-    this.render();
+    this.render(this.todos);
   }
+
+  /**
+   * Chargement des todos sous forme d'objets de type Todo dans this.todos
+   * @param  {[type]} todos [description]
+   * @return {[type]}       [description]
+   */
   loadTodos (todos) {
     for (const todo of todos) {
       this.todos.push(new Todo({parent: this, todo}));
@@ -21,19 +27,19 @@ export default class TodoList {
   * Rendu de la TodoList
   * @return {[type]} [description]
   */
-  render () {
+  render (todos) {
     this.el.innerHTML = this.template;
     // Le DOM de la liste existe pour le navigateur
       this.listEl = this.el.querySelector('.todo-list');
     // Rendu des todos
-      for (let todo of this.todos) {
+      for (let todo of todos) {
         todo.render();
       }
 
     // Calcul du nombre de todos not completed
       this.setNotCompletedNumber();
     // Activation des éléments interactifs
-      this.activerBtns();
+      this._activerBtns();
   }
 
   setNotCompletedNumber() {
@@ -67,15 +73,40 @@ export default class TodoList {
     });
   }
 
+  _filter (filter) {
+    switch (filter) {
+      case 'active':
+        this.render(this.todos.filter(function (todo) {
+          return !todo.completed;
+        }));
+        break;
+      case 'completed':
+        this.render(this.todos.filter(function (todo) {
+          return todo.completed;
+        }));
+        break;
+      default:
+        this.render(this.todos);
+    }
+  }
+
 /**
   * Activation des éléments interactifs de la TodoList
   * @return {[type]} [description]
   */
-  activerBtns() {
+  _activerBtns() {
     // Activation de l'input .new-todo
       this.el.querySelector('.new-todo').onkeyup = (e) => {
         if (e.keyCode === 13) {
           this.addTodo();
+        }
+      }
+
+    // Activation des .filter
+      const filterBtns = this.el.querySelectorAll('.filter');
+      for (let filterBtn of filterBtns) {
+        filterBtn.onclick = () => {
+          this._filter(filterBtn.dataset.filter);
         }
       }
   }

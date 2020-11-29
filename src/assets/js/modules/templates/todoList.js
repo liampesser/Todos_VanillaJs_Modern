@@ -14,13 +14,13 @@ export default `
     <span class="todo-count"><strong id="todo-count">1</strong> items left</span>
     <ul class="filters">
       <li>
-        <a href="#/" class="selected">All</a>
+        <a href="#/" data-filter="all" class="filter selected">All</a>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <a href="#/active" data-filter="active" class="filter">Active</a>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <a href="#/completed" data-filter="completed" class="filter">Completed</a>
       </li>
     </ul>
     <button class="clear-completed">Clear completed</button>
